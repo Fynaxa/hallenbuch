@@ -87,7 +87,7 @@ python3 -m unittest discover -s tests
 ```
 
 329 Tests plus 58 Prüfungen der Warteschlange in Node. Sie sind die
-Abnahmekriterien aus dem Lieferschnitt, in Code. Die Zahlen und jeder hier
+Abnahmekriterien aus der vereinbarten Leistungsbeschreibung, in Code. Die Zahlen und jeder hier
 genannte Testname werden von `tests/test_dokumente.py` gegen die Wirklichkeit
 geprüft: Wer einen Test umbenennt oder löscht, ohne diese Liste anzufassen,
 bekommt einen roten Lauf statt einer stillen Lücke.
@@ -145,8 +145,9 @@ Sicherung meldet ausserdem, wenn auf der Platte weniger als 15 Prozent frei sind
 Wöchentlich wird deshalb der **ganze** Ordner `betrieb/` abgezogen, nicht nur
 `betrieb/sicherungen/`. Das Einspielen schreibt sich selbst ins Protokoll,
 damit eine zurückgesetzte Lücke später erklärbar ist.
-Die beiden Anleitungen für den Betrieb liegen in `anleitungen/` (Halle eine
-Seite, Büro zwei), gemeinsame Gestaltung in `anleitungen/anleitung.css`.
+Für den Betrieb existieren zwei gedruckte Anleitungen, eine Seite für die Halle
+und zwei fürs Büro. Sie tragen die Marke des Auftraggebers und liegen deshalb
+nicht in diesem Repository.
 Davor gehört ein Caddy oder nginx mit TLS; der Dienst lauscht nur auf 127.0.0.1.
 Datenbank und Fotos liegen in `betrieb/`. Sicherung: dieser eine Ordner.
 
@@ -185,7 +186,7 @@ Ohne diese Angaben läuft das System im Probebetrieb weiter, aber es stellt nich
 - Die echte Leistungs- und Preisliste, dazu drei echte Rechnungen der letzten Woche.
 - Liste der Autohäuser mit Anschrift und, wo vorhanden, Käuferreferenz.
 - Steuerberater: Name, Berater- und Mandantennummer, Rechnungsdatenservice beantragt.
-- Antworten auf die vier Fragen aus dem Lieferschnitt: Jahresumsatz über 800.000 €,
+- Antworten auf vier offene Fragen: Jahresumsatz über 800.000 €,
   Netz im hinteren Hallenteil, Zahl der Rechnungsempfänger, heutiges Rechnungsprogramm.
 
 ## Bewusst nicht gebaut
