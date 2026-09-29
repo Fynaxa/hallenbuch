@@ -313,7 +313,7 @@ class Griff(BaseHTTPRequestHandler):
                 return self._datei(STATISCH, weg[len("/statisch/"):])
             if weg == "/manifest.json":
                 return self._senden(json.dumps({
-                    "name": "TDetailing Hallenbuch", "short_name": "Hallenbuch",
+                    "name": "Hallenbuch", "short_name": "Hallenbuch",
                     "description": "Fahrzeugerfassung und Sammelabrechnung",
                     "start_url": "/erfassen", "scope": "/",
                     "display": "standalone", "orientation": "portrait",

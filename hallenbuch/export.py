@@ -37,7 +37,7 @@ LIESMICH = """Datenexport Hallenbuch
 =====================
 
 Erzeugt am: %(zeit)s
-Betrieb:    TDetailing
+Betrieb:    (Name des Betriebs)
 
 Inhalt
 ------

@@ -1,4 +1,4 @@
-/* Hallenbuch fuer TDetailing.
+/* Hallenbuch fuer einen Fahrzeugaufbereitungsbetrieb.
 
    Konzept: ein Laufzettel am Fahrzeug, kein Formular am Schreibtisch.
    Haltung uebernommen aus beispiele/fitness.html (Studioplan): schwere
@@ -6,7 +6,7 @@
    Pillen als Schaltflaechen, und EINE Akzentflaeche, die die Hervorhebung traegt.
    Uebernommen ist die Logik, nicht das Aussehen: andere Schrift, andere Farben.
 
-   Farbe: die Marke von TDetailing, gemessen am Schriftzug ihrer Visitenkarte
+   Farbe: die Marke des Betriebs, gemessen am Schriftzug seiner Visitenkarte
    (marke/td-visitenkarte.jpg). Cyan auf Schwarz.
      --cyan       nur auf dunklem Grund oder als Flaeche mit dunkler Schrift.
                   Als Text auf Weiss hat er 2,2:1 und ist unlesbar.

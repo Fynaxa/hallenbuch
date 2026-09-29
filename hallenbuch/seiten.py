@@ -85,7 +85,7 @@ def huelle(titel, inhalt, benutzer=None, aktiv="", leiste="", probebetrieb=False
 </main>
 %(leiste)s
 <div class="quittung" id="quittung" role="status" aria-live="polite" hidden></div>
-<div class="fuss"><b>TDetailing Hallenbuch</b>Fahrzeugerfassung und Sammelabrechnung</div>
+<div class="fuss"><b>Hallenbuch</b>Fahrzeugerfassung und Sammelabrechnung</div>
 <input type="file" accept="image/*" capture="environment" id="foto-datei" hidden>
 <script src="/statisch/app.js?v=%(marke)s" defer></script>
 </body>

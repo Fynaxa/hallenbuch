@@ -33,6 +33,13 @@ keine Kundenadressen. `betrieb/` und `.env` sind ausgeschlossen; die Vorlage
 `.env.template` zeigt, welche Werte der Betrieb selbst setzt. Der
 Lexware-Zugang gehört dem Betrieb, nie dem Dienstleister.
 
+**Der Name des Auftraggebers steht hier nicht.** Nicht, weil es etwas zu
+verbergen gäbe, sondern weil ein öffentliches Repository die inneren Abläufe
+seiner Abrechnung zeigt und das seine Entscheidung ist, nicht meine. Wer im
+Bewerbungsgespräch danach fragt, bekommt den Namen und, mit seinem
+Einverständnis, die Telefonnummer — dasselbe gilt für die beiden Bedienanleitungen
+und den Auftrag selbst.
+
 ## Was es tut
 
 1. Mitarbeiter erfasst am Auto die FIN, wählt Autohaus und Leistung, fertig.
