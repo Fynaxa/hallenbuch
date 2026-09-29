@@ -1,0 +1,23 @@
+[Unit]
+Description=Hallenbuch — Fahrzeugerfassung und Sammelabrechnung
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=hallenbuch
+WorkingDirectory=/opt/hallenbuch
+EnvironmentFile=/opt/hallenbuch/.env
+ExecStart=/usr/bin/python3 /opt/hallenbuch/start.py
+Restart=always
+RestartSec=5
+
+# Der Dienst braucht nichts ausser seinem eigenen Ordner.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/hallenbuch/betrieb
+
+[Install]
+WantedBy=multi-user.target
