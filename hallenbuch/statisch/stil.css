@@ -1,0 +1,297 @@
+/* Hallenbuch fuer TDetailing.
+
+   Konzept: ein Laufzettel am Fahrzeug, kein Formular am Schreibtisch.
+   Haltung uebernommen aus beispiele/fitness.html (Studioplan): schwere
+   Schmalschrift in Versalien, grosse Zahlen, Kennzahlenkacheln, runde Karten,
+   Pillen als Schaltflaechen, und EINE Akzentflaeche, die die Hervorhebung traegt.
+   Uebernommen ist die Logik, nicht das Aussehen: andere Schrift, andere Farben.
+
+   Farbe: die Marke von TDetailing, gemessen am Schriftzug ihrer Visitenkarte
+   (marke/td-visitenkarte.jpg). Cyan auf Schwarz.
+     --cyan       nur auf dunklem Grund oder als Flaeche mit dunkler Schrift.
+                  Als Text auf Weiss hat er 2,2:1 und ist unlesbar.
+     --cyan-tief  derselbe Ton abgedunkelt, fuer Ueberschriften und Aktionen
+                  auf hellem Grund (5,3:1 auf dem Grund, 6,1:1 unter Weiss).
+   Rot steht ausserhalb der Marke und markiert nur Gutschrift und Storno,
+   weil eine Warnung nicht wie eine normale Aktion aussehen darf. */
+@import url("schriften.css");
+
+:root{
+  --nacht:#0C1116; --grund:#EDEFF2; --karte:#FFFFFF; --tinte:#101418;
+  --mut:#586770; --linie:#D3D9DE; --fein:#E4E8EC;
+  --cyan:#3FBFDF; --cyan-tief:#0B6B85; --cyan-blass:#D6F0F8;
+  --rot:#A02730; --rot-hell:#FAE6E7;
+  --disp:"Saira Condensed","Arial Narrow",sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,sans-serif;
+  --mono:"Azeret Mono",ui-monospace,monospace;
+  --spring:cubic-bezier(.34,1.4,.64,1);
+  --rund:14px;
+  --leiste:5.75rem;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--grund);color:var(--tinte);font:17px/1.5 var(--body)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cyan-tief);outline-offset:2px}
+h1,h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  line-height:.92;letter-spacing:.005em}
+
+/* Dunkles Band oben, so wie auf ihrer Karte */
+.kopf{background:var(--nacht);color:#DCE6EA;
+  padding:.85rem 1.25rem;display:flex;align-items:center;gap:.85rem;
+  padding-top:calc(.85rem + env(safe-area-inset-top))}
+.kopf .firma{font:900 1.75rem/1 var(--disp);text-transform:uppercase;
+  letter-spacing:.05em;color:var(--cyan)}
+.kopf .name{font:700 1rem/1 var(--disp);text-transform:uppercase;letter-spacing:.09em;
+  color:#8FA3AC;padding-left:.85rem;border-left:1px solid #253640}
+.kopf .wer{margin-left:auto;font:400 .82rem/1.3 var(--mono);color:#8FA3AC;text-align:right}
+.kopf .wer a{color:var(--cyan);text-decoration:none}
+
+/* Reiter als Pillen */
+nav{background:var(--karte);border-bottom:1px solid var(--linie);
+  display:flex;gap:.3rem;overflow-x:auto;padding:.6rem 1rem;position:sticky;top:0;z-index:15}
+nav a{flex:0 0 auto;padding:.6rem 1.05rem;color:var(--mut);text-decoration:none;
+  font:700 .95rem/1 var(--disp);text-transform:uppercase;letter-spacing:.06em;
+  border-radius:999px;white-space:nowrap;transition:background .2s var(--spring)}
+nav a:hover{background:var(--grund);color:var(--tinte)}
+nav a[aria-current="page"]{background:var(--nacht);color:#fff}
+
+main{padding:1.5rem 1.25rem 2rem;max-width:78rem;margin:0 auto}
+main.mit-leiste{padding-bottom:calc(var(--leiste) + 1.25rem)}
+main a{color:var(--cyan-tief);text-decoration:none;
+  border-bottom:2px solid var(--cyan-blass)}
+main a:hover{border-bottom-color:var(--cyan-tief)}
+
+h1{font-size:clamp(2.4rem,7vw,3.9rem);color:var(--cyan-tief)}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);margin:2rem 0 .85rem}
+.unter{color:var(--mut);font-size:1rem;margin-top:.5rem;max-width:56ch}
+
+/* Kennzahlen */
+.zahlen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;
+  margin:1.5rem 0}
+.zahl{background:var(--karte);border-radius:var(--rund);padding:1.1rem 1.25rem}
+.zahl b{display:block;font:900 3rem/1 var(--disp);color:var(--tinte);
+  font-variant-numeric:tabular-nums}
+.zahl span{font-size:.92rem;color:var(--mut)}
+.zahl.hebt{background:var(--cyan)}
+.zahl.hebt b,.zahl.hebt span{color:var(--tinte)}
+
+/* Meldungen */
+.meldung{border-radius:var(--rund);padding:1rem 1.15rem;margin-bottom:1.25rem;
+  background:var(--cyan-blass);font-size:1rem}
+.meldung b{font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--cyan-tief);margin-right:.4rem}
+.meldung.schlecht{background:var(--rot-hell)}
+.meldung.schlecht b{color:var(--rot)}
+.meldung ul{margin:.3rem 0 0 1.1rem}
+
+/* Formular */
+form.block{display:grid;gap:1.1rem}
+label{display:block}
+label .was{display:block;font:700 .92rem/1.3 var(--disp);text-transform:uppercase;
+  letter-spacing:.07em;color:var(--mut);margin-bottom:.4rem}
+input,select,textarea{width:100%;height:3.4rem;border:2px solid var(--linie);
+  border-radius:10px;padding:0 .9rem;background:var(--karte);appearance:none}
+textarea{height:auto;padding:.8rem .9rem}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--cyan-tief)}
+input.fin{font:500 1.5rem/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;
+  height:4.2rem}
+select{background-image:linear-gradient(45deg,transparent 49%,var(--mut) 50%),
+  linear-gradient(-45deg,transparent 49%,var(--mut) 50%);
+  background-position:calc(100% - 1.15rem) 1.55rem,calc(100% - .7rem) 1.55rem;
+  background-size:.45rem .45rem;background-repeat:no-repeat;padding-right:2.5rem}
+.zwei{display:grid;grid-template-columns:1fr;gap:1.1rem}
+.hinweis-klein{font-size:.9rem;color:var(--mut);margin-top:.35rem}
+
+/* Schaltflaechen als Pillen */
+button,.knopf{font:900 1rem/1 var(--disp);text-transform:uppercase;letter-spacing:.06em;
+  padding:0 1.6rem;height:3.4rem;border:2px solid var(--tinte);border-radius:999px;
+  background:var(--tinte);color:#fff;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  transition:transform .3s var(--spring)}
+button:hover,.knopf:hover{transform:translateY(-2px)}
+button:active,.knopf:active{transform:scale(.97)}
+button.haupt,.knopf.haupt{background:var(--cyan-tief);border-color:var(--cyan-tief)}
+button.still,.knopf.still{background:transparent;color:var(--tinte)}
+button.gefahr,.knopf.gefahr{background:transparent;border-color:var(--rot);color:var(--rot)}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+button.klein,.knopf.klein{font-size:.85rem;padding:0 1rem;height:2.5rem}
+
+/* Daumenleiste am Handy */
+.leiste{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--karte);
+  border-top:1px solid var(--linie);padding:.8rem 1.25rem;
+  padding-bottom:calc(.8rem + env(safe-area-inset-bottom));display:flex;gap:.6rem}
+.leiste button,.leiste .knopf{flex:1;height:3.8rem;font-size:1.1rem}
+
+/* Fahrzeugkarten */
+.karten{display:grid;gap:.7rem}
+.fzg{background:var(--karte);border-radius:var(--rund);padding:1rem 1.15rem}
+.fzg .streifen{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.fzg .nr{font:700 .82rem/1 var(--mono);color:var(--mut)}
+.fzg .haus{font:900 1.05rem/1 var(--disp);text-transform:uppercase;letter-spacing:.05em;
+  margin-left:auto;color:var(--cyan-tief)}
+.fin{font:500 1.28rem/1.25 var(--mono);letter-spacing:.03em;word-break:break-all}
+.fzg .unterzeile{display:flex;flex-wrap:wrap;gap:.25rem .9rem;margin-top:.5rem;
+  font-size:.94rem;color:var(--mut);align-items:baseline}
+.fzg .betrag{font:900 1.35rem/1 var(--disp);color:var(--tinte);margin-left:auto;
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.fzg .notiz{margin-top:.5rem;padding:.5rem .7rem;background:var(--grund);
+  border-radius:10px;font-size:.94rem;color:var(--tinte)}
+
+.marke{display:inline-block;font:700 .78rem/1 var(--disp);letter-spacing:.09em;
+  text-transform:uppercase;padding:.38rem .6rem;border-radius:999px;
+  background:var(--fein);color:var(--mut)}
+.marke.offen{background:var(--cyan);color:var(--tinte)}
+.marke.gutschrift{background:var(--rot-hell);color:var(--rot)}
+
+/* Tabellen */
+.rahmen{overflow-x:auto;background:var(--karte);border-radius:var(--rund);padding:.5rem}
+table{width:100%;border-collapse:collapse;font-size:.97rem}
+th{text-align:left;font:700 .8rem/1.3 var(--disp);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--mut);padding:.75rem .8rem;
+  border-bottom:2px solid var(--tinte);white-space:nowrap}
+td{padding:.8rem;border-bottom:1px solid var(--fein);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.z,th.z{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.z{font-family:var(--mono)}
+td.m{font-family:var(--mono);font-size:.92rem}
+td b{font-weight:700}
+
+/* Buerolayout */
+.buero{display:grid;gap:1.25rem}
+.feld{background:var(--karte);border-radius:var(--rund);padding:1.35rem}
+.feld h2{margin-top:0;font-size:1.6rem}
+.summenzeile{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.6rem 0;border-bottom:1px solid var(--fein)}
+.summenzeile:last-child{border-bottom:0}
+.summenzeile span{color:var(--mut);font-size:.96rem}
+.summenzeile b{font:900 1.3rem/1 var(--disp);font-variant-numeric:tabular-nums}
+.summenzeile b.gross{font-size:2.3rem;color:var(--cyan-tief)}
+
+.leer{padding:2.5rem 1.25rem;text-align:center;color:var(--mut);
+  background:var(--karte);border-radius:var(--rund)}
+
+.probe{background:var(--cyan-blass);color:var(--cyan-tief);padding:.6rem 1.25rem;
+  font:400 .92rem/1.4 var(--body);text-align:center;
+  border-bottom:1px solid var(--linie)}
+.probe b{font:700 .84rem/1 var(--disp);text-transform:uppercase;letter-spacing:.07em;
+  margin-right:.4rem}
+.fuss{background:var(--nacht);color:#8FA3AC;padding:2rem 1.25rem 2.5rem;
+  font:400 .92rem/1.5 var(--body);text-align:center}
+.fuss b{font:900 1.05rem/1 var(--disp);text-transform:uppercase;letter-spacing:.07em;
+  color:var(--cyan);display:block;margin-bottom:.35rem}
+
+@media (min-width:34rem){ .zwei{grid-template-columns:1fr 1fr} }
+@media (min-width:62rem){
+  .buero{grid-template-columns:24rem minmax(0,1fr);align-items:start}
+  .zwei{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:52rem){
+  .zahlen{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .zahl b{font-size:2.4rem}
+}
+@media (max-width:34rem){
+  main{padding:1.25rem 1rem 1.5rem}
+  .kopf{padding-inline:1rem}
+  .kopf .firma{font-size:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+
+/* Fotos am Fahrzeug */
+.fotos{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;margin-top:.75rem;
+  padding-top:.7rem;border-top:1px solid var(--fein)}
+.fotos img{width:3.4rem;height:3.4rem;object-fit:cover;border-radius:8px;display:block}
+.fotos a{border:0;line-height:0}
+
+/* Stammdaten: ein Satz je Eintrag, das Formular klappt darunter auf. */
+.satz{border-bottom:1px solid var(--fein);padding:.9rem 1.15rem}
+.satz:last-child{border-bottom:0}
+.satz>summary{cursor:pointer;list-style:none}
+.satz>summary::-webkit-details-marker{display:none}
+.satz>summary::before{content:"+";float:right;font:700 1.1rem/1 var(--disp);
+  color:var(--mut);margin-left:.8rem}
+.satz[open]>summary::before{content:"\2212"}
+.satz>form{margin-top:.9rem}
+.haken{display:flex;align-items:center;gap:.5rem;font-size:.96rem}
+.haken input{width:auto;margin:0}
+
+/* Eine Rechnung, die haengengeblieben ist, muss sich von einer
+   unterscheiden, die nur auf den Klick wartet. */
+.zahl.warnt b{color:var(--rot)}
+.marke.stoerung{background:var(--rot-hell);color:var(--rot)}
+.fotos a.schaden img{outline:3px solid var(--rot);outline-offset:-3px}
+.foto-wahl{font:700 .78rem/1 var(--disp);text-transform:uppercase;letter-spacing:.08em;
+  color:var(--mut);margin-left:.3rem}
+button.foto-knopf{font:700 .8rem/1 var(--disp);text-transform:uppercase;letter-spacing:.06em;
+  height:2.2rem;padding:0 .75rem;background:transparent;color:var(--cyan-tief);
+  border:2px solid var(--cyan-blass)}
+button.foto-knopf:hover{border-color:var(--cyan-tief);transform:none}
+button.foto-knopf[aria-busy="true"]{opacity:.5}
+
+/* Lesehilfe: das Typenschild abfotografieren und vom Bildschirm abtippen.
+   Echte Texterkennung kann der Browser nicht, siehe backlog.md A2. */
+.kamera{display:flex;gap:.6rem;flex-wrap:wrap}
+.kamera button{flex:1 1 12rem}
+.lesehilfe{margin:0;background:var(--karte);border-radius:var(--rund);padding:.6rem;
+  border:2px solid var(--cyan-tief)}
+.lesehilfe img{display:block;width:100%;height:auto;border-radius:10px;
+  max-height:22rem;object-fit:contain;background:var(--nacht)}
+.lesehilfe figcaption{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+  margin-top:.6rem;font-size:.92rem;color:var(--mut)}
+.lesehilfe figcaption button{margin-left:auto}
+
+/* Zeitraum-Schnellwahl: am Abrechnungstag will niemand zwei Daten tippen. */
+.schnellwahl{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:1.1rem}
+.schnellwahl a{text-align:center;font:700 .85rem/1 var(--disp);
+  text-transform:uppercase;letter-spacing:.05em;color:var(--mut);
+  padding:.7rem .8rem;border:2px solid var(--linie);border-radius:999px;
+  text-decoration:none;white-space:nowrap}
+.schnellwahl a:hover{border-color:var(--cyan-tief);color:var(--cyan-tief);background:none}
+.schnellwahl a.an{background:var(--nacht);border-color:var(--nacht);color:#fff}
+
+/* Quittung nach dem Erfassen.
+   Sitzt unten beim Daumen, nicht oben am Seitenanfang: In der Halle schaut
+   niemand lange auf den Bildschirm, und wer nicht sicher ist, ob es geklappt
+   hat, erfasst das Auto lieber ein zweites Mal. */
+.quittung{position:fixed;left:0;right:0;bottom:0;z-index:35;
+  background:var(--cyan);color:var(--tinte);padding:1rem 1.25rem;
+  font:700 1.05rem/1.3 var(--body);text-align:center;
+  box-shadow:0 -6px 24px rgba(12,17,22,.18)}
+.quittung b{font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  letter-spacing:.06em;display:block;font-size:.82rem;margin-bottom:.2rem}
+.quittung.schlecht{background:var(--rot);color:#fff}
+main.mit-leiste ~ .quittung{
+  bottom:calc(var(--leiste) + env(safe-area-inset-bottom))}
+@media (prefers-reduced-motion:no-preference){
+  .quittung{animation:hoch .25s var(--spring) both}
+  @keyframes hoch{from{transform:translateY(100%)}to{transform:none}}
+}
+.quittung .fin-quittung{font:500 1.15rem/1.3 var(--mono);letter-spacing:.04em;
+  word-break:break-all}
+
+/* Fundort in der Suche: auf welcher Rechnung steht das Fahrzeug. */
+.fundort{margin-top:.55rem;padding-top:.5rem;border-top:1px solid var(--fein);
+  font-size:.92rem;color:var(--mut)}
+
+/* Leere Zustände: sagen, warum nichts da ist und was jetzt zu tun ist. */
+.leer b{display:block;font:900 1.35rem/1.1 var(--disp);text-transform:uppercase;
+  letter-spacing:.02em;color:var(--tinte);margin-bottom:.5rem}
+.leer p{margin:0 auto;max-width:44ch}
+.leer .knopf{margin-top:1.1rem}
+td.leer-zeile{color:var(--mut);text-align:center;padding:1.5rem .8rem}
+
+/* Störung beim Ausstellen: bleibt stehen, bis sie behoben ist. */
+.stoerung{background:var(--rot-hell);border-radius:var(--rund);padding:1.15rem 1.35rem;
+  margin-bottom:1.25rem}
+/* NUR die Überschrift, nicht jedes <b> im Block: Der Hinweistext enthält
+   selbst eins, und der wäre sonst ein Satz in Versalien. */
+.stoerung > b{display:block;font:900 1.2rem/1.3 var(--disp);text-transform:uppercase;
+  letter-spacing:.02em;color:var(--rot);margin-bottom:.5rem}
+.stoerung p b{font-weight:700;color:var(--rot)}
+.stoerung p{margin:0 0 .6rem;max-width:66ch}
+.stoerung p:last-child{margin-bottom:0}
+.stoerung .grund{font:400 .92rem/1.5 var(--mono);word-break:break-word;
+  background:var(--karte);border-radius:10px;padding:.7rem .85rem}
+.stoerung .wann{font-size:.92rem;color:var(--mut)}

@@ -1,0 +1,8 @@
+/* Selbst ausgeliefert. Die App ruft im Betrieb keinen fremden Server auf. */
+@font-face{font-family:'Atkinson Hyperlegible';font-style:normal;font-weight:400;font-display:swap;src:url('schriften/atkinson-hyperlegible-400.woff2') format('woff2')}
+@font-face{font-family:'Atkinson Hyperlegible';font-style:normal;font-weight:700;font-display:swap;src:url('schriften/atkinson-hyperlegible-700.woff2') format('woff2')}
+@font-face{font-family:'Azeret Mono';font-style:normal;font-weight:400;font-display:swap;src:url('schriften/azeret-mono-400.woff2') format('woff2')}
+@font-face{font-family:'Azeret Mono';font-style:normal;font-weight:500;font-display:swap;src:url('schriften/azeret-mono-500.woff2') format('woff2')}
+@font-face{font-family:'Saira Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('schriften/saira-condensed-700.woff2') format('woff2')}
+@font-face{font-family:'Saira Condensed';font-style:normal;font-weight:800;font-display:swap;src:url('schriften/saira-condensed-800.woff2') format('woff2')}
+@font-face{font-family:'Saira Condensed';font-style:normal;font-weight:900;font-display:swap;src:url('schriften/saira-condensed-900.woff2') format('woff2')}
