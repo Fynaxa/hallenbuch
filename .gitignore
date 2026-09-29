@@ -1,0 +1,8 @@
+# Betriebsdaten und Zugaenge gehoeren nie ins Repo.
+.env
+betrieb/*.db
+betrieb/*.db-wal
+betrieb/*.db-shm
+betrieb/fotos/
+__pycache__/
+*.pyc
