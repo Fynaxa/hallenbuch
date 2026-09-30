@@ -57,7 +57,7 @@ und den Auftrag selbst.
 
 GoBD verlangt Unveränderbarkeit, Aufbewahrung und einen Audit-Trail. Das
 Hallenbuch ist die Erfassung vorne, nie die Buchführung. Der Beleg entsteht dort,
-wo er zehn Jahre liegen bleibt. Entscheidung vom 16.09.2026, nicht neu aufrollen.
+wo er acht Jahre liegen bleibt. Entscheidung vom 16.09.2026, nicht neu aufrollen.
 
 ## Stapel
 
