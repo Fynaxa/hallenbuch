@@ -55,7 +55,7 @@ und den Auftrag selbst.
 
 ## Warum kein eigenes Rechnungsprogramm
 
-GoBD verlangt Unveränderbarkeit, Aufbewahrung und einen Audit-Trail. Das
+GoBD verlangen Unveränderbarkeit, Aufbewahrung und einen Audit-Trail. Das
 Hallenbuch ist die Erfassung vorne, nie die Buchführung. Der Beleg entsteht dort,
 wo er acht Jahre liegen bleibt. Entscheidung vom 16.09.2026, nicht neu aufrollen.
 
