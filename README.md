@@ -7,8 +7,8 @@ E-Rechnung nach EN 16931, über ein bestehendes Rechnungsprogramm.
 
 **Gebaut im Kundenauftrag** für eine Fahrzeugaufbereitung mit rund 95 Fahrzeugen
 in der Woche, die ihre Rechnungen bis dahin von Hand schrieb — ein bis zwei
-Stunden am Tag. Auftrag vom 16.09.2026, Auftragswert 1.000 €, Abschlagsrechnung
-2026-001 gestellt. Das System läuft im Probebetrieb; scharf geschaltet wird es,
+Stunden am Tag. Auftrag vom 16.09.2026. Das System läuft im Probebetrieb;
+scharf geschaltet wird es,
 sobald der Betrieb seine Zugänge und Preislisten beigebracht hat (siehe „Noch
 offen" am Ende).
 
@@ -150,33 +150,6 @@ und zwei fürs Büro. Sie tragen die Marke des Auftraggebers und liegen deshalb
 nicht in diesem Repository.
 Davor gehört ein Caddy oder nginx mit TLS; der Dienst lauscht nur auf 127.0.0.1.
 Datenbank und Fotos liegen in `betrieb/`. Sicherung: dieser eine Ordner.
-
-## Design-Brief (vor dem Bau festgelegt)
-
-1. **Konzept:** ein Laufzettel am Fahrzeug, kein Formular am Schreibtisch.
-2. **Register:** Werkstatt. Hoher Kontrast, große Flächen, nichts Dekoratives.
-   Bedienbar mit Handschuhen, bei Tageslicht, in unter zwanzig Sekunden.
-3. **Schrift:** Saira Condensed 900 in Versalien als Anzeige, Atkinson Hyperlegible
-   für Text (ausdrücklich auf Lesbarkeit unter schlechten Bedingungen entworfen),
-   Azeret Mono für FIN und Beträge. Alle drei liegen lokal, kein Google-Aufruf.
-   **Versalien nur für kurze Etiketten und Überschriften, nie für Sätze** — ganze
-   Sätze in Großbuchstaben sind messbar schlechter lesbar.
-4. **Farbe: die Marke des Betriebs**, gemessen am Schriftzug seiner Visitenkarte:
-   **Cyan `#3FBFDF` auf Schwarz**. Der Markenton
-   steht nur auf dunklem Grund — auf Weiß hat er 2:1 und wäre als Text unlesbar.
-   Für Aktion und Text auf hellem Grund dient derselbe Farbton abgedunkelt
-   (`#0B6B85`, 5,1:1 auf dem Arbeitsgrund, 6,1:1 unter weißer Schrift). Rot
-   `#8C2F39` steht bewusst außerhalb der Marke und markiert nur Gutschrift und
-   Storno, weil eine Warnung nicht wie eine normale Aktion aussehen darf.
-5. **Layout:** Handy einspaltig mit fester Daumenleiste unten, Büro zweispaltig
-   mit echter Tabelle. Keine zentrierte Symmetrie.
-6. **Signature-Detail:** die FIN als gruppierter Mono-Block (WMI, VDS, VIS) auf
-   jeder Karte. Primäre Aktion am Handy: Fahrzeug erfassen. Im Büro:
-   Sammelrechnung erzeugen.
-
-Stufe: **refined-conventional**. Das Ding wird jeden Tag benutzt, tägliche
-Nutzbarkeit schlägt Neuheit. Detektor (`impeccable detect`): 0 Befunde über alle
-sechs Oberflächen.
 
 ## Noch offen, hängt am Betrieb
 
